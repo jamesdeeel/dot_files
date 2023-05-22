@@ -1,0 +1,99 @@
+########################################################################
+#                                                                      #
+#   This .bashrc is executed by each bash shell as it starts.          #
+#                                                                      #
+#   This file is provided by Maths for new users.  We strongly suggest #
+#   you do NOT delete it unless you are ABSOLUTELY sure you know what  #
+#   you are doing.  You may modify it by adding commands at the end.   #
+#                                                                      #
+########################################################################
+
+#
+# Execute the global Maths Bashrc
+#
+
+if [ -r /alt/ssetup/shellconfig/Bashrc ]; then
+    . /alt/ssetup/shellconfig/Bashrc
+fi
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin/scripts:$PATH
+export PATH=$HOME/store/CETQCD/jd688:$PATH
+export PATH=$HOME/Documents/repos/three_point_fitting/scripts:$PATH
+# export PYTHONPATH=$PYTHONPATH:$HOME/Documents/repos/charm_radtrans/jfd_work/code/ThreePoint
+export PYTHONPATH=$PYTHONPATH:$HOME/Documents/repos/three_point_fitting/src
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib:/alt/applic/user-maint/jd688/bin/lib/:$HOME/lib"
+export STEM=/store/CETQCD/cet34/HadSpec/
+export WORKDIR=/store/CETQCD/cet34/HadSpec/szscl21_20_128_b1p50_t_x4p300_um0p0840_sm0p0743_n1p265_per/redstar/
+#
+# Add personal customisation commands after this line ------------------
+#
+
+# Set umask to 077.  This means that by default new files will only be
+# readable and writable by you.  If you want others to be able to read
+# new files you create, replace this line with umask 0022
+
+umask 027
+
+
+alias sshtcd='ssh -tXY rsync.tchpc.tcd.ie ssh seagull'
+
+## get rid of command not found ##
+alias cd..='cd ..'
+
+## a quick way to get out of current directory ##
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+
+# ignore unnecessary commands in history
+export HISTIGNORE="pwd:ls:cd:history"
+
+## Colorize the ls output ##
+alias ls='ls --color=always'
+
+## Use a long listing format ##
+alias ll='ls -lA'
+alias lll='ls -lA | less'
+
+## Show hidden files ##
+alias l.='ls -d .* --color=always'
+
+## keep colors on less
+export LESS=-r
+
+## make my PS1 look pretty
+# export PS1="\[\e[1;32m[\u@\h \W]\$ \e[m\]"
+export PS1="\[\e[32m\][\[\e[m\]\[\e[31m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\]:\[\e[36m\]\W\[\e[m\]\[\e[32m\]]\[\e[m\]\[\e[32;47m\]\\$\[\e[m\] "
+
+# kaspers fix for cd
+if [[ "$(type -t cd)" = 'alias' ]]; then
+	  unalias cd
+  fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/alt/applic/spack/linux-ubuntu16.04-x86_64/gcc-7.2.0/miniconda3-4.8.2-iiyixgv4a7vez23nbdd2kgwrzfmm3wpp/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/alt/applic/spack/linux-ubuntu16.04-x86_64/gcc-7.2.0/miniconda3-4.8.2-iiyixgv4a7vez23nbdd2kgwrzfmm3wpp/etc/profile.d/conda.sh" ]; then
+        . "/alt/applic/spack/linux-ubuntu16.04-x86_64/gcc-7.2.0/miniconda3-4.8.2-iiyixgv4a7vez23nbdd2kgwrzfmm3wpp/etc/profile.d/conda.sh"
+    else
+        export PATH="/alt/applic/spack/linux-ubuntu16.04-x86_64/gcc-7.2.0/miniconda3-4.8.2-iiyixgv4a7vez23nbdd2kgwrzfmm3wpp/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+# module load gmp/6.1.2/gcc-7.2.0-e43mcep
+# module load mpfr/3.1.5/gcc-7.2.0-ieu6nor
+# module load zlib/1.2.8/gcc-9.3.0-qbxy32w
+# module load openssl/1.0.2u/gcc-9.3.0-qjbt53n
+# module load fftw3/3.3.5
+# module load libpciaccess/0.13.2/gcc-7.2.0-xzaviuo
+# module load libxml2/2.9.3/gcc-7.2.0-pektyg2
+# module load hwloc/1.11.8/gcc-7.2.0-u5qkeec
+# module load openmpi/3.0.0/gcc-7.2.0-yyeqfks
+# module load fftw/3.3.7/gcc-7.2.0-lw4upq6
